@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: #000000;
+  --background-hex: #ffeef8;
+  scroll-behavior: smooth;
+  scroll-snap-: center;
+}
+
+:root[data-mode='dark'] {
+  --foreground-rgb: #ffeef8;
+  --background-hex: #000000;
+}
+
+body {
+  color: var(--foreground-rgb);
+  background: var(--background-hex);
+  transition: all 0.5s ease-in-out;
+}
+
+/* {*/
+/*  transition: all 0.5s ease-in-out !important;*/
+/*}*/
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.card {
+  @apply p-3 bg-[#ffeef8] dark:bg-black shadow-xl rounded-xl text-black dark:text-[#ffeef8] border border-gray-300 dark:border-white dark:border-opacity-20;
+  transition: all 0.5s ease-in-out;
+}
+
+.sep-border {
+  @apply border-t-2 border-gray-300 dark:border-gray-700;
+  transition:
+    border-bottom-color 0.5s ease-in-out,
+    border-top-color 0.5s ease-in-out,
+    border-left-color 0.5s ease-in-out,
+    border-right-color 0.5s ease-in-out;
+}
