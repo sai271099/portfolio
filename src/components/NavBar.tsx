@@ -10,7 +10,6 @@ const NavBar = () => {
       </div>
       <ul className={'flex flex-row items-center justify-center p-2 w-3/5'}>
         <NavItem name={'About'} link={'#about'} icon={'account_circle'} />
-        <NavItem name={'Skills'} link={'#skills'} icon={'build'} /> 
         <NavItem name={'Work'} link={'#work'} icon={'code_blocks'} />
         <NavItem name={'Projects'} link={'#projects'} icon={'assignment'} /> 
         <NavItem name={'Education'} link={'#education'} icon={'school'} />

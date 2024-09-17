@@ -12,7 +12,6 @@ export default function Home() {
     <div>
         <Title />
         <About />
-        <Skills />
         <Work />
         <Projects />
         <Education />
