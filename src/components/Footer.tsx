@@ -17,7 +17,8 @@ export const Footer = () => {
             <ul className={'flex flex-col'}>
               <h2 className={'text-xl font-semibold mb-5 ml-4'}>Site Map</h2>
               <NavItem name={'About'} link={'#about'} icon={'account_circle'} />
-              <NavItem name={'Work & Projects'} link={'#work'} icon={'code_blocks'} />
+              <NavItem name={'Work'} link={'#work'} icon={'code_blocks'} />
+              <NavItem name={'Projects'} link={'#projects'} icon={'assignment'} /> 
               <NavItem name={'Education'} link={'#education'} icon={'school'} />
               <NavItem name={'Contact'} link={'#contact'} icon={'alternate_email'} />
             </ul>

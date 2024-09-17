@@ -28,7 +28,7 @@ const Work = () => {
         'Architected and optimized RESTful APIs with Node.js and Express, ensuring secure high-frequency handling requests and enhancing real-time monitoring and alert capabilities.',
         'Spearheaded the creation of real-time analytics pipelines using WebSockets and D3.js, delivering dynamic data updates and interactive visualizations that enhanced decision-making processes for 10,000+ users.',
         'Enhanced MongoDB performance by implementing advanced indexing strategies, resulting in a 40% boost in query execution speed. Managed structured datasets with Oracle SQL, improving database efficiency, and retrieval times.',
-        'Orchestration of AWS deployments using Docker and Kubernetes improved system scalability and reduced operational downtime by 10%.',
+        'Orchestrated AWS deployments using Docker and Kubernetes, improving system scalability and reducing operational downtime by 10%.',
         'Architected and implemented CI/CD pipelines using Jenkins, JUnit, and Selenium, accelerating release cycles by 15% and ensuring consistent software quality through automated testing.',
         'Directed Scrum ceremonies and enforced agile best practices, increasing team productivity and accelerating project timelines to meet tight deadlines.',
       ],
@@ -75,9 +75,14 @@ const Work = () => {
   };
 
   return (
-    <div className={'sep-border mx-6 px-2 py-16 mt-6'}>
+    // Assign the id="work" to the Work Experience section
+    <div id="work" className={'sep-border mx-6 px-2 py-16 mt-6'}>
       <div className={'flex flex-col max-w-5xl mx-auto'}>
-        <h1 className={'text-4xl font-bold mb-8'}>Work Experience</h1>
+        {/* Icon and Title for Work Experience */}
+        <div className={'flex flex-row gap-4 items-center mb-8'}>
+          <span className={'material-symbols-rounded text-4xl'}>code_blocks</span> {/* Work Icon */}
+          <h1 className={'text-4xl font-bold'}>Work Experience</h1>
+        </div>
 
         {/* Buttons for Full-Time and Intern */}
         <motion.div className="flex flex-row justify-center gap-4 mb-8">
