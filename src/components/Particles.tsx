@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect } from 'react';
 import 'particles.js'; // Import the particles.js script
 
@@ -41,10 +41,10 @@ const ParticlesComponent = () => {
         retina_detect: true,
       });
     }
-  }, []);
+  }, []); // Empty dependency array ensures this effect only runs once after the component is mounted
 
   return (
-    <div id="particles-js" style={{ position: 'absolute', width: '100%', height: '100%' }}></div>
+    <div id="particles-js" style={{ position: 'absolute', width: '100%', height: '100%', zIndex: -1 }}></div>
   );
 };
 

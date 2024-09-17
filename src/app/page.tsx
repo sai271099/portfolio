@@ -6,7 +6,8 @@ import Contact from '@/components/Contact';
 import About from '@/components/About';
 import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
-import Particles from '@/components/Particles';
+import dynamic from 'next/dynamic';
+const Particles = dynamic(() => import('@/components/Particles'), { ssr: false });
 
 export default function Home() {
   return (
