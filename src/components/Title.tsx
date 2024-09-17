@@ -32,33 +32,25 @@ const Title = () => {
     const handleTyping = () => {
       const currentFullText = currentText;
 
-      // If deleting, shorten the displayedText by 1 character
       if (isDeleting) {
         setDisplayedText((prev) => prev.slice(0, prev.length - 1));
-      } 
-      // If typing, add the next character to displayedText
-      else {
+      } else {
         setDisplayedText((prev) => currentFullText.slice(0, prev.length + 1));
       }
 
-      // Determine the next action when typing or deleting is complete
       if (!isDeleting && displayedText === currentFullText) {
-        // If fully typed, start deleting after a short pause
         setTimeout(() => setIsDeleting(true), pauseTime);
       } else if (isDeleting && displayedText === '') {
-        // When fully deleted, move to the next role and start typing
         setIsDeleting(false);
         setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
       }
     };
 
-    // Control the typing/deleting speed based on the current action
     const timer = setTimeout(
       handleTyping,
       isDeleting ? deletingSpeed : typingSpeed
     );
 
-    // Cleanup the timer on unmount
     return () => clearTimeout(timer);
   }, [displayedText, isDeleting, currentRoleIndex, currentText]);
 
@@ -80,19 +72,17 @@ const Title = () => {
             'text-3xl font-medium text-center flex flex-row items-center gap-4 opacity-70'
           }
         >
-          {/* Icon with the respective color */}
           <span className={`material-symbols-rounded scale-150 mr-3 ${color}`}>
             {icon}
           </span>
-          {/* Typing and deleting effect for the text */}
           <span>{displayedText}</span>
         </div>
         <div className={'flex flex-row gap-3 items-center'}>
           <TitleCTA
-            title={'Contact me'}
-            link={'/contact'}
-            icon={'alternate_email'}
-            styles={'bg-black text-white dark:bg-[#ffeef8] dark:text-black'}
+            title={"Let's Connect!"}
+            link={'https://www.linkedin.com/in/sai-yada27/'} 
+            icon={'link'} 
+            styles={'bg-blue-600 text-white'}
           />
           <TitleCTA
             title={'Resume'}

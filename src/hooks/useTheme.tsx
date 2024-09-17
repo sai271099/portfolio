@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useTheme = () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };

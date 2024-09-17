@@ -103,7 +103,7 @@ const Projects = () => {
           display: none;
           padding: 20px;
           font-family: 'Roboto', sans-serif;
-          color: var(--text-color); /* Adapt text color for theme */
+          color: #000000; /* Adapt text color for theme */
         }
 
         .project-card:hover .card-info {
