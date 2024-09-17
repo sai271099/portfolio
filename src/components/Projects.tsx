@@ -37,10 +37,6 @@ const initialProjects = [
 const Projects = () => {
   const [showAll, setShowAll] = useState(false);
 
-  const toggleShowAll = () => {
-    setShowAll(!showAll);
-  };
-
   return (
     <SectionLayout>
       {/* Use the "assignment" icon to match the first image */}
@@ -63,10 +59,6 @@ const Projects = () => {
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="arrow-container" onClick={toggleShowAll}>
-        <div className="arrow">{showAll ? "❮" : "❯"}</div>
       </div>
 
       {/* Style */}
@@ -140,27 +132,6 @@ const Projects = () => {
 
         .github-link i {
           margin-right: 8px;
-        }
-
-        .arrow-container {
-          position: absolute;
-          right: 10px;
-          top: 50%;
-          transform: translateY(-50%);
-          cursor: pointer;
-          background-color: black;
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: white;
-          font-size: 24px;
-        }
-
-        .arrow {
-          display: inline-block;
         }
       `}</style>
     </SectionLayout>
