@@ -11,12 +11,12 @@ const Contact = () => {
 
   const [submitted, setSubmitted] = useState(false); // To check if the form is submitted
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  const handleSubmit = async (e) => {
+  
+  const handleSubmit = async (e:React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault(); // Prevent page reload
 
     try {
