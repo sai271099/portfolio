@@ -1,6 +1,49 @@
+'use client';
+import { useState } from 'react';
 import NavItem from '@/components/elements/NavItem';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    fullname: '',
+    email: '',
+    message: '',
+  });
+
+  const [submitted, setSubmitted] = useState(false); // To check if the form is submitted
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent page reload
+
+    try {
+      // Replace the form action URL with your own if needed
+      const response = await fetch('https://formspree.io/f/xwpedeyo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitted(true); // Set form as submitted
+        
+        // Set timeout to reload the page after 2 seconds
+        setTimeout(() => {
+          window.location.reload(); // Reload the page
+        }, 2000);
+      } else {
+        alert('Error submitting the form');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <div className="sep-border mx-6 px-2 py-16 mt-6">
       <div className="flex flex-col max-w-5xl mx-auto">
@@ -14,61 +57,69 @@ const Contact = () => {
         </div>
 
         <div className="flex gap-5 flex-row">
-          <form
-            action="https://formspree.io/f/xwpedeyo"
-            method="POST"
-            className="flex flex-col gap-5 w-2/3"
-          >
-            <h2 className="text-3xl font-semibold">Let&apos;s Connect</h2>
-            <div className="flex flex-row gap-4">
-              <div className="flex flex-col gap-1 w-1/2">
-                <label htmlFor="fullname" className="ml-1 font-medium text-lg">
-                  Full Name
+          {submitted ? (
+            <div className="text-2xl font-bold">
+              Thank you! Your message has been submitted.
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-2/3">
+              <h2 className="text-3xl font-semibold">Let&apos;s Connect</h2>
+              <div className="flex flex-row gap-4">
+                <div className="flex flex-col gap-1 w-1/2">
+                  <label htmlFor="fullname" className="ml-1 font-medium text-lg">
+                    Full Name
+                  </label>
+                  <input
+                    id="fullname"
+                    name="fullname"
+                    placeholder="John Doe"
+                    type="text"
+                    autoComplete="name"
+                    value={formData.fullname} // Controlled input
+                    onChange={handleInputChange} // Update state on input change
+                    className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 bg-white bg-opacity-60 dark:bg-opacity-20"
+                  />
+                </div>
+                <div className="flex flex-col gap-1 w-1/2">
+                  <label htmlFor="email" className="ml-1 font-medium text-lg">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    placeholder="john.doe@gmail.com"
+                    type="email"
+                    autoComplete="email"
+                    value={formData.email} // Controlled input
+                    onChange={handleInputChange} // Update state on input change
+                    className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 bg-white bg-opacity-60 dark:bg-opacity-20 dark:text-[#ffeef8]"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="message" className="ml-1 font-medium text-lg">
+                  Message <span className="opacity-40">(totally optional)</span>
                 </label>
-                <input
-                  id="fullname"
-                  name="fullname"
-                  placeholder="John Doe"
-                  type="text"
-                  autoComplete="name"
-                  className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 bg-white bg-opacity-60 dark:bg-opacity-20"
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Share any thoughts or feedback..."
+                  value={formData.message} // Controlled input
+                  onChange={handleInputChange} // Update state on input change
+                  className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 bg-white bg-opacity-60 dark:bg-opacity-20 dark:text-[#ffeef8] h-40"
                 />
               </div>
-              <div className="flex flex-col gap-1 w-1/2">
-                <label htmlFor="email" className="ml-1 font-medium text-lg">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  placeholder="john.doe@gmail.com"
-                  type="email"
-                  autoComplete="email"
-                  className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 bg-white bg-opacity-60 dark:bg-opacity-20 dark:text-[#ffeef8]"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-1">
-              <label htmlFor="message" className="ml-1 font-medium text-lg">
-                Message <span className="opacity-40">(totally optional)</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                placeholder="Share any thoughts or feedback..."
-                className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 bg-white bg-opacity-60 dark:bg-opacity-20 dark:text-[#ffeef8] h-40"
-              />
-            </div>
 
-            <button
-              id="submit"
-              type="submit"
-              className="flex flex-row gap-3 items-center px-6 py-3 rounded-full bg-black text-white w-fit dark:bg-[#ffeef8] dark:text-black transition-colors"
-            >
-              Send
-              <span className="material-symbols-rounded scale-110">send</span>
-            </button>
-          </form>
+              <button
+                id="submit"
+                type="submit"
+                className="flex flex-row gap-3 items-center px-6 py-3 rounded-full bg-black text-white w-fit dark:bg-[#ffeef8] dark:text-black transition-colors"
+              >
+                Send
+                <span className="material-symbols-rounded scale-110">send</span>
+              </button>
+            </form>
+          )}
 
           <ul className="flex flex-col w-1/3">
             <h2 className="text-3xl font-semibold mb-12 ml-3">Contact Info</h2>
