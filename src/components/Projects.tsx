@@ -1,8 +1,19 @@
 'use client';
+import { useState } from 'react';
 import SectionLayout from '@/components/elements/SectionLayout';
 import SectionTitle from '@/components/elements/SectionTitle';
 
-const initialProjects = [
+const dataScienceProject = [
+  {
+    title: "Object Detection Using DeepSORT",
+    github: "https://github.com/sai271099/Object-Detection-Using-Deepsort",
+    image: "object.jpg", // Replace with your image path
+    technologies: ["YOLOv3", "DeepSORT", "Python", "TensorFlow", "OpenCV"],
+    description: "This project implements real-time object detection and multi-object tracking using YOLOv3 and DeepSORT. It tracks multiple objects efficiently and handles occlusion and fast motion."
+  }
+];
+
+const webDevelopmentProjects = [
   {
     title: "GatorTaxi",
     github: "https://github.com/sai271099/GatorTaxi",
@@ -34,14 +45,29 @@ const initialProjects = [
 ];
 
 const Projects = () => {
+  const [selectedCategory, setSelectedCategory] = useState('web'); // Default category
+
+  const getProjects = () => {
+    if (selectedCategory === 'data') {
+      return dataScienceProject;
+    }
+    return webDevelopmentProjects;
+  };
+
   return (
     <SectionLayout>
       {/* Ensure the id here matches the link in the NavBar */}
       <SectionTitle title={'Projects'} icon={'assignment'} id={'projects'} />
 
+      {/* Buttons Below Section Title */}
+      <div className="button-container">
+        <button className={`btn ${selectedCategory === 'web' ? 'active' : ''}`} onClick={() => setSelectedCategory('web')}>Web Development</button>
+        <button className={`btn ${selectedCategory === 'data' ? 'active' : ''}`} onClick={() => setSelectedCategory('data')}>Data Science</button>
+      </div>
+
       {/* Projects Grid */}
       <div className="grid-container">
-        {initialProjects.map((project, index) => (
+        {getProjects().map((project, index) => (
           <div key={index} className="project-card">
             <div className="card">
               <div className="image-container">
@@ -71,17 +97,42 @@ const Projects = () => {
         ))}
       </div>
 
-
       {/* Style */}
       <style jsx>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@400;700&display=swap');
 
         .grid-container {
           display: grid;
-          grid-template-columns: repeat(2,1fr);
+          grid-template-columns: repeat(2, 1fr);
           column-gap: 160px; /* Gap between columns */
-          row-gap: 40px; /* Gap between rows
+          row-gap: 40px; /* Gap between rows */
           padding: 20px;
+        }
+
+        .button-container {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 20px;
+          gap: 15px;
+        }
+
+        .btn {
+          padding: 10px 20px;
+          background-color: #0070f3;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-family: 'Poppins', sans-serif;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+          background-color: #005bb5;
+        }
+
+        .btn.active {
+          background-color: #005bb5;
         }
 
         .project-card {
@@ -96,7 +147,6 @@ const Projects = () => {
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           overflow: hidden;
           transition: transform 0.3s ease, opacity 0.3s ease;
-          
         }
 
         .card-info {
