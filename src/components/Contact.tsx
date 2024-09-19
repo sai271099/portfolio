@@ -9,18 +9,19 @@ const Contact = () => {
     message: '',
   });
 
-  const [submitted, setSubmitted] = useState(false); // To check if the form is submitted
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Update for correct type in input change handler
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  
-  const handleSubmit = async (e:React.ChangeEvent<HTMLInputElement>) => {
+
+  // Update for correct form submit event type
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent page reload
 
     try {
-      // Replace the form action URL with your own if needed
       const response = await fetch('https://formspree.io/f/xwpedeyo', {
         method: 'POST',
         headers: {
@@ -30,11 +31,11 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        setSubmitted(true); // Set form as submitted
-        
-        // Set timeout to reload the page after 2 seconds
+        setSubmitted(true);
+
+        // Reload the page after 2 seconds
         setTimeout(() => {
-          window.location.reload(); // Reload the page
+          window.location.reload();
         }, 2000);
       } else {
         alert('Error submitting the form');
@@ -75,8 +76,8 @@ const Contact = () => {
                     placeholder="John Doe"
                     type="text"
                     autoComplete="name"
-                    value={formData.fullname} // Controlled input
-                    onChange={handleInputChange} // Update state on input change
+                    value={formData.fullname}
+                    onChange={handleInputChange} // Correct type for input change
                     className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 bg-white bg-opacity-60 dark:bg-opacity-20"
                   />
                 </div>
@@ -90,8 +91,8 @@ const Contact = () => {
                     placeholder="john.doe@gmail.com"
                     type="email"
                     autoComplete="email"
-                    value={formData.email} // Controlled input
-                    onChange={handleInputChange} // Update state on input change
+                    value={formData.email}
+                    onChange={handleInputChange} // Correct type for input change
                     className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 bg-white bg-opacity-60 dark:bg-opacity-20 dark:text-[#ffeef8]"
                   />
                 </div>
@@ -104,8 +105,8 @@ const Contact = () => {
                   id="message"
                   name="message"
                   placeholder="Share any thoughts or feedback..."
-                  value={formData.message} // Controlled input
-                  onChange={handleInputChange} // Update state on input change
+                  value={formData.message}
+                  onChange={(e) => handleInputChange(e as React.ChangeEvent<HTMLTextAreaElement>)} // Correct type for textarea change
                   className="border border-gray-300 dark:border-gray-700 rounded-lg p-3 bg-white bg-opacity-60 dark:bg-opacity-20 dark:text-[#ffeef8] h-40"
                 />
               </div>
